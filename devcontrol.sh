@@ -56,7 +56,7 @@ export -f echo_debug
 function startup() {
     command="$0"
     echo_debug "Startup"
-    cd "$(dirname $0)/.."
+    cd "$(git rev-parse --show-toplevel)"
     rootdir="$(pwd)"
     declare -a actionList
 }

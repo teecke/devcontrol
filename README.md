@@ -10,8 +10,10 @@ The `devcontrol` script can help by calling your set of scripts that automate th
 
 ## Usage
 
+The script assumes that you are working with a `git` repository.
+
 1. Put the `devcontrol.sh` script somewhere in your path an make it executable. I suggest you to put it under `/usr/local/bin` naming it`devcontrol`, or put in a directory of your project in `bin/devcontrol.sh`.
-2. Create a directory called `devcontrol/actions` im the root directory of your project and put your action scripts (one bash script file per action) within.
+2. Create a directory called `devcontrol/actions` im the root directory of your `git` repository and put your action scripts (one bash script file per action) within.
 3. Optionally, create another directory called `devcontrol/global` and put a bash script called `startup.sh` with your initialization variables and global functions.
 4. Execute the `devcontrol` script in the root folder of your project.
 
