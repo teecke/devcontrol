@@ -8,14 +8,19 @@ You may be tired of executing the same sentences in order, over and over again, 
 
 The `devcontrol` script can help by calling your set of scripts that automate these tasks, such as starting or stopping services, loading initial data, putting everything together in a single dynamic management interface and allowing you to keep the focus on your development work.
 
-## Usage
+## Installation
 
-The script assumes that you are working with a `git` repository.
+Open a console and execute `curl https://raw.githubusercontent.com/teecke/devcontrol/master/install.sh | sudo bash`. The `devcontrol` script will install in your `/usr/local/bin` directory.
 
-1. Put the `devcontrol.sh` script somewhere in your path an make it executable. I suggest you to put it under `/usr/local/bin` naming it`devcontrol`, or put in a directory of your project in `bin/devcontrol.sh`.
-2. Create a directory called `devcontrol/actions` im the root directory of your `git` repository and put your action scripts (one bash script file per action) within.
-3. Optionally, create another directory called `devcontrol/global` and put a bash script called `startup.sh` with your initialization variables and global functions.
-4. Execute the `devcontrol` script in the root folder of your project.
+## Create actions
+
+You can add actions to your repository. Simply put one or more bash script files under the `devcontrol/actions` directory of your `git` repository with the `.sh` extension. Then execute `devcontrol` at the root of the repository.
+
+In details:
+
+1. Create a directory called `devcontrol/actions` at the root directory of your `git` repository and put whithin your action scripts (one bash script file per action, with the `.sh` extension).
+2. Optionally, create another directory called `devcontrol/global` and put a bash script called `startup.sh` with your initialization variables and global functions.
+3. Execute the `devcontrol` script in the root folder of your project.
 
 The `devcontrol` script will collect the whole of your action scripts and put enable you to execute as parametrized options of the `devcontrol` script.
 
