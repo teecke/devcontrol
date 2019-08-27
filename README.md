@@ -12,8 +12,8 @@ The `devcontrol` script can help by calling your set of scripts that automate th
 
 Open a console and execute:
 
-```console
-curl https://raw.githubusercontent.com/teecke/devcontrol/master/install.sh | sudo bash`
+```shell
+curl https://raw.githubusercontent.com/teecke/devcontrol/master/install.sh | sudo bash
 ```
 
 The `devcontrol` script will be installed in your `/usr/local/bin` directory.
