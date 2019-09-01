@@ -15,11 +15,17 @@ pipeline {
                 jplStart(cfg)
             }
         }
-        stage ('Make release'){
+        stage ('Test') {
+            agent { label 'docker' }
+            steps  {
+                sh 'bin/test.sh'
+            }
+        }
+        stage ('Make release') {
             agent { label 'docker' }
             when { branch 'release/new' }
             steps {
-                jplMakeRelease(cfg,true)
+                jplMakeRelease(cfg, true)
             }
         }
     }
@@ -36,6 +42,6 @@ pipeline {
         buildDiscarder(logRotator(artifactNumToKeepStr: '20',artifactDaysToKeepStr: '30'))
         disableConcurrentBuilds()
         skipDefaultCheckout()
-        timeout(time: 1, unit: 'DAYS')
+        timeout(time: 10, unit: 'MINUTES')
     }
 }

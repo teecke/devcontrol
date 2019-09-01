@@ -2,7 +2,6 @@
 #
 # @file devcontrol
 # @brief Development Environment Control script
-
 set -euo pipefail
 
 # Global Variables
