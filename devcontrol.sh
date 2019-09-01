@@ -5,6 +5,9 @@
 
 set -euo pipefail
 
+# Global Variables
+declare -a actionList
+
 # @description Output a error message through the standard output
 #
 # @example
@@ -35,7 +38,7 @@ export -f echo_err
 #
 function echo_debug () {
     if [ "${DC_DEBUG-}" == "1" ]; then
-        echo_err ">>>> DEBUG >>>>> $(date "+%Y-%m-%d %H:%M:%S") devcontrol: $@"
+        echo_err ">>>> DEBUG >>>>> $(date "+%Y-%m-%d %H:%M:%S") devcontrol: $*"
     fi
 }
 export -f echo_debug
@@ -58,6 +61,7 @@ function startup() {
     echo_debug "Startup"
     cd "$(git rev-parse --show-toplevel)"
     rootdir="$(pwd)"
+    export rootdir
     declare -a actionList
 }
 
@@ -94,17 +98,16 @@ function delegatedStartup() {
 # @stdout none
 #
 function loadActionList() {
+    local scriptList
     echo_debug "Load action list from 'devcontrol/actions' directory"
-    declare -a actionsList
     MAXWIDTH=0
-    local scriptList=$(ls devcontrol/actions|sort)
+    scriptList=$(find devcontrol/actions -type f -name "*.sh" -maxdepth 1 -mindepth 0|sort)
     local i=0
     for script in $scriptList; do
-        action=$(echo $script|sed "s/\.sh$//g")
+        action=$(basename "${script/\.sh/}")
         actionList[$i]=$action
-        STRLEN=$(echo ${action}|wc -c)
-        if [ $STRLEN -gt $MAXWIDTH ]; then
-            MAXWIDTH=$STRLEN
+        if [ ${#action} -gt $MAXWIDTH ]; then
+            MAXWIDTH=${#action}
         fi
         echo_debug "- Found action '${actionList[i]}'"
         i=$((i+1))
@@ -126,7 +129,7 @@ function loadActionList() {
 function assertActionExist() {
     local search="$1"
     for action in ${actionList[*]}; do
-        [[ "$(echo $action|cut -f 1 -d ':')" == $search ]] && echo_debug "The requested action '$1' exist" && return 0
+        [[ $(echo "$action"|cut -f 1 -d ':') == "$search" ]] && echo_debug "The requested action '$1' exist" && return 0
     done
     echo_err "The action '$search' does not exist. Aborting"
     echo_debug "end"
@@ -203,8 +206,8 @@ function showUsage () {
     printf "    - $command %-${MAXWIDTH}s # This information page" "help"
     echo
     for action in ${actionList[*]}; do
-        printf "    - $command %-${MAXWIDTH}s # " $action
-        devcontrol/actions/${action}.sh brief
+        printf "    - $command %-${MAXWIDTH}s # " "$action"
+        "devcontrol/actions/${action}.sh" "brief"
     done
     echo
     echo "Use '$command help <action>' to display his help (e.g. $command help ${actionList[0]})"
@@ -227,7 +230,7 @@ if [ $# -eq 0 ]; then
 elif [ $# -eq 1 ] && [ "$1" = "help" ]; then
     SHOW_USAGE=1
 fi
-if [ $SHOW_USAGE -eq 1 ]; then
+if [ ${SHOW_USAGE} -eq 1 ]; then
     showUsage
     exit 0
 fi
@@ -235,7 +238,7 @@ fi
 # Determine action type "exec" or "help"
 action=$1
 shift
-if [ $action == "help" ]; then
+if [ "${action}" == "help" ]; then
     action=$1
     task="help"
 else
@@ -243,9 +246,9 @@ else
 fi
 
 # Get arguments
-arguments=$@
+arguments=$*
 
 # Execute the action if exist
-assertActionExist $action
-devcontrol/actions/${action}.sh ${task} "${arguments}"
+assertActionExist "${action}"
+"devcontrol/actions/${action}.sh" "${task}" "${arguments}"
 echo_debug "end"
