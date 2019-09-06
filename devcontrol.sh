@@ -100,7 +100,7 @@ function loadActionList() {
     local scriptList
     echo_debug "Load action list from 'devcontrol/actions' directory"
     MAXWIDTH=0
-    scriptList=$(find devcontrol/actions -type f -name "*.sh" -maxdepth 1 -mindepth 0|sort)
+    scriptList=$(find devcontrol/actions -maxdepth 1 -mindepth 0 -type f -name "*.sh"|sort)
     local i=0
     for script in $scriptList; do
         action=$(basename "${script/\.sh/}")
