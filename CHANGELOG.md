@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.4.1 (2019-09-06)
+
+### Update
+
+* Change order in find statement ([c7d22c2](https://github.com/teecke/devcontrol/commit/c7d22c2))
+
+### Build
+
+* Update Auto Release Log adding v0.4.1 info with JPL ([6119121](https://github.com/teecke/devcontrol/commit/6119121))
+
+### Docs
+
+* Generate v0.4.0 changelog with JPL ([6926053](https://github.com/teecke/devcontrol/commit/6926053))
+
 ## v0.4.0 (2019-09-01)
 
 ### New
