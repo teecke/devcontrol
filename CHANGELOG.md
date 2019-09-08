@@ -1,5 +1,20 @@
 # Changelog
 
+## v0.4.2 (2019-09-08)
+
+### Update
+
+* Remove shellcheck container after the test execution ([634e93e](https://github.com/teecke/devcontrol/commit/634e93e))
+
+### Build
+
+* Update Auto Release Log adding v0.4.2 info with JPL ([02f6f43](https://github.com/teecke/devcontrol/commit/02f6f43))
+* Update to jpl v3.2.1 ([1bc2370](https://github.com/teecke/devcontrol/commit/1bc2370))
+
+### Docs
+
+* Generate v0.4.1 changelog with JPL ([5014367](https://github.com/teecke/devcontrol/commit/5014367))
+
 ## v0.4.1 (2019-09-06)
 
 ### Update
