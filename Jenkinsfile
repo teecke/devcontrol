@@ -1,9 +1,9 @@
 #!groovy
 
-@Library('github.com/teecke/jenkins-pipeline-library@v3.3.1') _
+@Library('github.com/teecke/jenkins-pipeline-library@v3.4.1') _
 
 // Initialize global config
-cfg = jplConfig('devcontrol', 'bash', '', [email:'pedroamador.rodriguez+teecke@gmail.com'])
+cfg = jplConfig('devcontrol', 'bash', '', [email: env.CITEECKE_NOTIFY_EMAIL_TARGETS])
 
 pipeline {
     agent { label 'docker' }
