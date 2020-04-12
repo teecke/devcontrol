@@ -1,3 +1,7 @@
+# DEPRECATED
+
+Please visit https://github.com/tpbtools/devcontrol
+
 # Development Environment Control Script
 
 Simply dev env control script writen in BASH
