@@ -1,6 +1,6 @@
 # DEPRECATED
 
-Please visit https://github.com/tpbtools/devcontrol
+Please visit https://github.com/ayudadigital/devcontrol
 
 # Development Environment Control Script
 
